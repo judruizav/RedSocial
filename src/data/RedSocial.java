@@ -6,7 +6,7 @@
 package data;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 /**
  *
  * @author Julian
@@ -31,8 +31,17 @@ public class RedSocial {
     }
     
     public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario){
-          
+      ArrayList<PerfilUsuario> usuariosEt= new ArrayList<PerfilUsuario>();
+      ArrayList<String> personasEt= new ArrayList<String>();
+      Fotografia nuevaFoto= new Fotografia(nombreArchivo,descripcion,usuario,usuariosEt,personasEt);
+      this.fotografias.add(nuevaFoto);
+      usuario.getFotosSubidas().add(nuevaFoto);
     }
     
+    public void hacerComentario(String texto, Date fechaCreacion, PerfilUsuario usuario){
+      Comentario nuevoComentario = new Comentario(texto,fechaCreacion, usuario);
+      this.comentarios.add(nuevoComentario);
+      usuario.getComentariosRealizados().add(nuevoComentario);
+    }
     
 }

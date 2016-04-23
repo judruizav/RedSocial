@@ -27,6 +27,34 @@ public class PerfilUsuario {
         this.fotosSubidas = fotosSubidas;
         this.fotosEt = fotosEt;
     }
+
+    public String getNombreReal() {
+        return nombreReal;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public String getClaveAcceso() {
+        return claveAcceso;
+    }
+
+    public String getCuentaCorreo() {
+        return cuentaCorreo;
+    }
+
+    public ArrayList<Comentario> getComentariosRealizados() {
+        return comentariosRealizados;
+    }
+
+    public ArrayList<Fotografia> getFotosSubidas() {
+        return fotosSubidas;
+    }
+
+    public ArrayList<Fotografia> getFotosEt() {
+        return fotosEt;
+    }
     
     
     
