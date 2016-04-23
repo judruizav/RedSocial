@@ -56,6 +56,11 @@ public class PerfilUsuario {
         return fotosEt;
     }
     
-    
+    @Override
+    public String toString(){
+      return "Nombre: " + this.nombreReal +"\n"+
+             "Nick: " + this.nick + "\n" +
+             "Correo: " + this.cuentaCorreo + "\n";    
+    }
     
 }

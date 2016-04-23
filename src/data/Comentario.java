@@ -19,4 +19,21 @@ public class Comentario {
       this.fechaCreacion= fechaCreacion;
       this.usuarioComent= usuarioComent;
     }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public PerfilUsuario getUsuarioComent() {
+        return usuarioComent;
+    }
+    
+    @Override
+    public String toString(){
+      return this.texto + "\n" + this.fechaCreacion;    
+    }
 }
