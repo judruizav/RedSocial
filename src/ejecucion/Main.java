@@ -16,6 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("No lo hagas perra...");
+        System.out.println("Nosotros somos... Los menores");
     }
     
 }
