@@ -5,6 +5,8 @@
  */
 package data;
 import java.util.ArrayList;
+import Exception.PerfilUsuarioException;
+import servicio.Servicio;
 /**
  *
  * @author Julian
@@ -13,14 +15,26 @@ public class PerfilUsuario {
     private String nombreReal;
     private String nick;
     private String claveAcceso;
+    private int edad;
     private String cuentaCorreo;
     private ArrayList<Comentario> comentariosRealizados;
     private ArrayList<Fotografia> fotosSubidas;
     private ArrayList<Fotografia> fotosEt;
 
-    public PerfilUsuario(String nombreReal, String nick, String claveAcceso, String cuentaCorreo, ArrayList<Comentario> comentariosRealizados, ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) {
+    public PerfilUsuario(String nombreReal, String nick, String claveAcceso, int edad, String cuentaCorreo, ArrayList<Comentario> comentariosRealizados, 
+            ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) throws PerfilUsuarioException{
+        if(nombreReal.length()>100){
+          throw new PerfilUsuarioException("El nombre no puede superar los 100 caracteres");    
+        }
+        if(edad<18){
+          throw new PerfilUsuarioException("Tiene que ser mayor de 18 para crear un perfil");   
+        }
+        if(claveAcceso.equals("123456")){
+          throw new PerfilUsuarioException("La clave no puede ser '123456'");     
+        }
         this.nombreReal = nombreReal;
         this.nick= nick;
+        this.edad = edad;
         this.claveAcceso = claveAcceso;
         this.cuentaCorreo = cuentaCorreo;
         this.comentariosRealizados = comentariosRealizados;

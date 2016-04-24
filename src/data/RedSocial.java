@@ -7,6 +7,9 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Date;
+import Exception.PerfilUsuarioException;
+import Exception.ComentarioException;
+import Exception.FotografiaException;
 /**
  *
  * @author Julian
@@ -22,11 +25,11 @@ public class RedSocial {
         this.fotografias = fotografias;
     }
     
-    public void crearPerfil(String nombreReal, String nick, String claveAcceso, String cuentaCorreo){
+    public void crearPerfil(String nombreReal, String nick, int edad, String claveAcceso, String cuentaCorreo) throws PerfilUsuarioException{
       ArrayList<Comentario> comentariosRealizados = new ArrayList<Comentario>();      
       ArrayList<Fotografia> fotosSubidas= new ArrayList<Fotografia>();
       ArrayList<Fotografia> fotosEt= new ArrayList<Fotografia>();
-      PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
+      PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, edad, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
       this.usuarios.add(nuevoUsuario);
     }
     
