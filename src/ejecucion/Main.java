@@ -6,7 +6,13 @@
 package ejecucion;
 import data.RedSocial;
 import data.Fotografia;
-import Exception.PerfilUsuarioException;
+import Exception.ClaveException;
+import Exception.CorreoException;
+import Exception.EdadException;
+import Exception.NickException;
+import Exception.NombreException;
+import Exception.ComentarioException;
+import Exception.FotografiaException;
 import java.util.*;
 import ui.UI;
 
@@ -19,7 +25,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws PerfilUsuarioException{
+    public static void main(String[] args) throws NombreException, EdadException, CorreoException, ClaveException{
         ArrayList<Fotografia> fotos= new ArrayList<Fotografia>();
         RedSocial laFormula= new RedSocial(fotos); 
         UI menu = new UI();

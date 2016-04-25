@@ -7,7 +7,11 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Date;
-import Exception.PerfilUsuarioException;
+import Exception.ClaveException;
+import Exception.CorreoException;
+import Exception.EdadException;
+import Exception.NickException;
+import Exception.NombreException;
 import Exception.ComentarioException;
 import Exception.FotografiaException;
 /**
@@ -25,7 +29,7 @@ public class RedSocial {
         this.fotografias = fotografias;
     }
     
-    public void crearPerfil(String nombreReal, String nick, int edad, String claveAcceso, String cuentaCorreo) throws PerfilUsuarioException{
+    public void crearPerfil(String nombreReal, String nick, int edad, String claveAcceso, String cuentaCorreo) throws NombreException, EdadException, CorreoException, ClaveException, NickException {
       ArrayList<Comentario> comentariosRealizados = new ArrayList<Comentario>();      
       ArrayList<Fotografia> fotosSubidas= new ArrayList<Fotografia>();
       ArrayList<Fotografia> fotosEt= new ArrayList<Fotografia>();

@@ -5,8 +5,13 @@
  */
 package data;
 import java.util.ArrayList;
-import Exception.PerfilUsuarioException;
+import Exception.ClaveException;
+import Exception.ComentarioException;
+import Exception.CorreoException;
+import Exception.EdadException;
+import Exception.NickException;        
 import servicio.Servicio;
+import Exception.NombreException;
 /**
  *
  * @author Julian
@@ -22,21 +27,21 @@ public class PerfilUsuario {
     private ArrayList<Fotografia> fotosEt;
 
     public PerfilUsuario(String nombreReal, String nick, String claveAcceso, int edad, String cuentaCorreo, ArrayList<Comentario> comentariosRealizados, 
-            ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) throws PerfilUsuarioException{
+            ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) throws NombreException, EdadException, CorreoException, ClaveException{
         if(nombreReal.length()>100){
-          throw new PerfilUsuarioException("El nombre no puede superar los 100 caracteres");    
+          throw new NombreException ("El nombre no puede superar los 100 caracteres");    
         }
         if(edad<18){
-          throw new PerfilUsuarioException("Tiene que ser mayor de 18 para crear un perfil");   
+          throw new EdadException ("Tiene que ser mayor de 18 para crear un perfil");   
         }
         if(claveAcceso.equals("123456")){
-          throw new PerfilUsuarioException("La clave no puede ser '123456'");    
+          throw new ClaveException ("La clave no puede ser '123456'");    
         }
         if(cuentaCorreo.contains("@")){
             cuentaCorreo.split("@");
-            if(cuentaCorreo.split("@")[1].contains(".co"));
+            if(cuentaCorreo.split("@")[1].contains(".com"));
         }else{
-            throw new PerfilUsuarioException("El formato del correo es incorrecto");
+            throw new CorreoException ("El formato del correo es incorrecto");
         }
         this.nombreReal = nombreReal;
         this.nick= nick;

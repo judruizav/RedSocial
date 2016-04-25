@@ -5,7 +5,13 @@
  */
 package ui;
 
-import Exception.PerfilUsuarioException;
+import Exception.ClaveException;
+import Exception.ComentarioException;
+import Exception.CorreoException;
+import Exception.EdadException;
+import Exception.NickException;        
+import servicio.Servicio;
+import Exception.NombreException;
 import data.Comentario;
 import data.Fotografia;
 import data.PerfilUsuario;
@@ -19,14 +25,19 @@ import java.util.*;
 public class UI {
     
     
-    public void menu(RedSocial laFormula, Scanner lectura){
+    public void menu(RedSocial laFormula, Scanner lectura) throws NombreException{
         int opcMenu = 0;
+        String nombre;
+        String nick;
+        String claveAcceso;
+        int edad;
+        String correo;
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
             System.out.println("Menu:");
             System.out.println("1: Crea tu perfil");
-            System.out.println("2: Has un comentario");
+            System.out.println("2: Haz un comentario");
             System.out.println("3: Subir Fotografia");
             System.out.println("4: Cerrar Red Social");
             opcMenu = lectura.nextInt();
@@ -35,23 +46,22 @@ public class UI {
                 try{
                 System.out.println("Crea tu perfil de La Formula");
                 System.out.print("Ingresa tu Nombre:             ");
-                String nombre = lectura.next();
+                nombre = lectura.next();
                 System.out.print("Ingresa tu nick:               ");
-                String nick = lectura.next();
+                nick = lectura.next();
                 System.out.print("Ingresa tu clave de acceso:    ");
-                String claveAcceso = lectura.next();
+                claveAcceso = lectura.next();
                 System.out.print("Ingresa tu edad:               ");
-                int edad = lectura.nextInt();
+                edad = lectura.nextInt();
                 System.out.print("Ingresa tu correo electronico: ");
-                String correo = lectura.next();
+                correo = lectura.next();
                 laFormula.crearPerfil(nombre, nick, edad, claveAcceso, correo);
                 System.out.println("");
                 System.out.println("Excelente, acabas de crear un perfil en La Formula");
                 System.out.println("");
-                
-                }catch(PerfilUsuarioException ex){
+                }catch(NickException | EdadException | ClaveException | CorreoException ex){
                     System.out.println(ex.getMessage());
-                }
+                }                
             }
         }while(opcMenu!=4);
         

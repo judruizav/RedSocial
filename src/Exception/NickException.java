@@ -7,11 +7,10 @@ package Exception;
 
 /**
  *
- * @author Julian
+ * @author IVAN
  */
-public class PerfilUsuarioException extends Exception{
-
-   public PerfilUsuarioException(String message){
+public class NickException extends Exception {
+       public NickException(String message){
      super(message);    
    }    
 }
