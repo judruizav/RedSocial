@@ -30,7 +30,13 @@ public class PerfilUsuario {
           throw new PerfilUsuarioException("Tiene que ser mayor de 18 para crear un perfil");   
         }
         if(claveAcceso.equals("123456")){
-          throw new PerfilUsuarioException("La clave no puede ser '123456'");     
+          throw new PerfilUsuarioException("La clave no puede ser '123456'");    
+        }
+        if(cuentaCorreo.contains("@")){
+            cuentaCorreo.split("@");
+            if(cuentaCorreo.split("@")[1].contains(".co"));
+        }else{
+            throw new PerfilUsuarioException("El formato del correo es incorrecto");
         }
         this.nombreReal = nombreReal;
         this.nick= nick;
@@ -74,6 +80,7 @@ public class PerfilUsuario {
     public String toString(){
       return "Nombre: " + this.nombreReal +"\n"+
              "Nick: " + this.nick + "\n" +
+             "Edad: " + this.edad + "\n" +
              "Correo: " + this.cuentaCorreo + "\n";    
     }
     
