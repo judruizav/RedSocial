@@ -10,7 +10,7 @@ import data.Comentario;
 import data.Fotografia;
 import data.PerfilUsuario;
 import data.RedSocial;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -18,14 +18,8 @@ import java.util.ArrayList;
  */
 public class UI {
     
-    public RedSocial crearRedSocial(){
-        ArrayList<Fotografia> fotografias = null;
-        RedSocial laFormula = new RedSocial(fotografias);
-        return laFormula;
-    }
     
-    public void menu(RedSocial laFormula){
-        java.util.Scanner lectura = new java.util.Scanner(System.in);
+    public void menu(RedSocial laFormula, Scanner lectura){
         int opcMenu = 0;
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
