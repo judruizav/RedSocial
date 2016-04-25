@@ -5,6 +5,10 @@
  */
 package ejecucion;
 
+import Exception.PerfilUsuarioException;
+import java.util.Scanner;
+import ui.UI;
+
 /**
  *
  * @author Julian
@@ -14,9 +18,17 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        System.out.println("No lo hagas perra...");
-        System.out.println("Nosotros somos... Los favoritos de las gatas");
+    public static void main(String[] args) throws PerfilUsuarioException{
+        UI menu = new UI();
+        Scanner scanner = new Scanner(System.in);
+        boolean indicador = false;
+        int opcion = 0;
+        while(indicador == false){
+            menu.menu(menu.crearRedSocial());
+               System.out.println("Desea continuar...1. Si 2. No");
+               opcion = scanner.nextInt();
+               if(opcion != 1)
+                  indicador = true;
+        }       
     }
-    
 }
