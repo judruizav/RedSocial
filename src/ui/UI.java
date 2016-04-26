@@ -58,15 +58,15 @@ public class UI {
                 claveAcceso = lectura.next();
                 System.out.print("Ingresa tu edad:               ");
                 edad = lectura.nextInt();
-                System.out.print("Ingresa tu correo electronico: ");
+                System.out.print("Ingresa tu correo electronico (example@correo.com): ");
                 correo = lectura.next();
                 this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);
                 System.out.println("");
                 System.out.println("Excelente, acabas de crear un perfil en La Formula");
                 System.out.println("");
-                }catch(NickException | EdadException | ClaveException | CorreoException | NombreException ex){
+                }catch(NickException | NombreException | EdadException | CorreoException | ClaveException ex){
                     System.out.println(ex.getMessage());
-                }                
+                }         
             }
         }while(opcMenu!=4);
         
