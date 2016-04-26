@@ -27,19 +27,21 @@ public class UI {
     
     public void menu(RedSocial laFormula, Scanner lectura) throws NombreException{
         int opcMenu = 0;
+        //Crear perfil
         String nombre;
         String nick;
         String claveAcceso;
         int edad;
         String correo;
+        //Iniciar sesion
+        String nickIni;
+        String claveAccesoIni;
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
             System.out.println("Menu:");
-            System.out.println("1: Crea tu perfil");
-            System.out.println("2: Haz un comentario");
-            System.out.println("3: Subir Fotografia");
-            System.out.println("4: Cerrar Red Social");
+            System.out.print("1: Crea tu perfil ");
+            System.out.print("2: Inicia sesion ");
             opcMenu = lectura.nextInt();
             System.out.println("");
             if(opcMenu==1){
@@ -62,6 +64,12 @@ public class UI {
                 }catch(NickException | EdadException | ClaveException | CorreoException ex){
                     System.out.println(ex.getMessage());
                 }                
+            }
+            if(opcMenu==2){
+                
+              System.out.println("1: Haz un comentario");
+              System.out.println("2: Subir Fotografia");
+              System.out.println("3: Cerrar Red Social");    
             }
         }while(opcMenu!=4);
         
