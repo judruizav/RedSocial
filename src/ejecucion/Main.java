@@ -14,6 +14,7 @@ import Exception.NombreException;
 import Exception.ComentarioException;
 import Exception.FotografiaException;
 import java.util.*;
+import servicio.Servicio;
 import ui.UI;
 
 /**
@@ -25,15 +26,14 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws NombreException, EdadException, CorreoException, ClaveException{
-        ArrayList<Fotografia> fotos= new ArrayList<Fotografia>();
-        RedSocial laFormula= new RedSocial(fotos); 
-        UI menu = new UI();
+    public static void main(String[] args) {
+        Servicio servicio = new Servicio();
+        UI menu = new UI(servicio);
         Scanner scanner = new Scanner(System.in);
         boolean indicador = false;
         int opcion = 0;
         while(indicador == false){
-            menu.menu(laFormula, scanner);
+            menu.menu(scanner);
                System.out.println("Desea continuar...1. Si 2. No");
                opcion = scanner.nextInt();
                if(opcion != 1)
