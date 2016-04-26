@@ -25,16 +25,32 @@ public class Fotografia {
         this.usuariosEt = usuariosEt;
         this.personasEt = personasEt;
     }
-    
-    public void etiquetarFotografiaUsuario(ArrayList<PerfilUsuario> usuarios, String nombre, Fotografia fotografia){
-      PerfilUsuario usuarioEt = servicio.buscarUsuario(usuarios, nombre);
-      fotografia.usuariosEt.add(usuarioEt);
-      usuarioEt.getFotosEt().add(fotografia);
+
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public PerfilUsuario getUsuarioFoto() {
+        return usuarioFoto;
+    }
+
+    public ArrayList<PerfilUsuario> getUsuariosEt() {
+        return usuariosEt;
+    }
+
+    public ArrayList<String> getPersonasEt() {
+        return personasEt;
+    }
+
+    public Servicio getServicio() {
+        return servicio;
     }
     
-    public void etiquetarFotografiaPersona(String nombre){
-      this.personasEt.add(nombre);
-    }
+   
     
     @Override
     public String toString(){

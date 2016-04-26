@@ -29,11 +29,11 @@ public class Servicio {
     }
     
     
-    public PerfilUsuario buscarUsuario(ArrayList<PerfilUsuario> usuarios, String buscar){
+    public PerfilUsuario buscarUsuario(String buscar){
       PerfilUsuario usuarioEncontrado= null;
-      for(int i=0; i<usuarios.size(); i++){
-        if(usuarios.get(i).getNombreReal().equals(buscar)||usuarios.get(i).getNick().equals(buscar)||usuarios.get(i).getCuentaCorreo().equals(buscar)){
-          usuarioEncontrado=usuarios.get(i);
+      for(int i=0; i<this.redSocial.getUsuarios().size(); i++){
+        if(this.redSocial.getUsuarios().get(i).getNombreReal().equals(buscar)||this.redSocial.getUsuarios().get(i).getNick().equals(buscar)||this.redSocial.getUsuarios().get(i).getCuentaCorreo().equals(buscar)){
+          usuarioEncontrado=this.redSocial.getUsuarios().get(i);
         }    
       }
       return usuarioEncontrado;
@@ -70,6 +70,9 @@ public class Servicio {
       ArrayList<Comentario> comentariosRealizados = new ArrayList<Comentario>();      
       ArrayList<Fotografia> fotosSubidas= new ArrayList<Fotografia>();
       ArrayList<Fotografia> fotosEt= new ArrayList<Fotografia>();
+      if(buscarUsuario(nick)!=null){
+        throw new NickException("El nick ya existe");    
+      }
       PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, edad, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
       this.redSocial.getUsuarios().add(nuevoUsuario);
     }
@@ -80,6 +83,16 @@ public class Servicio {
       Fotografia nuevaFoto= new Fotografia(nombreArchivo,descripcion,usuario,usuariosEt,personasEt);
       this.redSocial.getFotografias().add(nuevaFoto);
       usuario.getFotosSubidas().add(nuevaFoto);
+    }
+    
+    public void etiquetarFotografiaUsuario(String nombre, Fotografia fotografia){
+      PerfilUsuario usuarioEt = buscarUsuario(nombre);
+      fotografia.getUsuariosEt().add(usuarioEt);
+      usuarioEt.getFotosEt().add(fotografia);
+    }
+    
+    public void etiquetarFotografiaPersona(String nombre, Fotografia fotografia){
+      fotografia.getPersonasEt().add(nombre);
     }
     
     public void hacerComentario(String texto, Date fechaCreacion, PerfilUsuario usuario){

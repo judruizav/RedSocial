@@ -31,7 +31,7 @@ public class UI {
     }
     
     public void menu(Scanner lectura){
-        int opcMenu = 0;
+        int opcMenu;
         //Crear perfil
         String nombre;
         String nick;
@@ -39,18 +39,20 @@ public class UI {
         int edad;
         String correo;
         //Iniciar sesion
-        String nickIni;
+        String accesoIni;
         String claveAccesoIni;
+        PerfilUsuario perfil= null;
+        boolean claveBandera;
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
             System.out.println("Menu:");
-            System.out.print("1: Crea tu perfil ");
-            System.out.print("2: Inicia sesion ");
-            opcMenu = lectura.nextInt();
+            System.out.println("1: Crea tu perfil. 2: Inicia sesion. 0: Salir ");
+            opcMenu= lectura.nextInt();
             System.out.println("");
             if(opcMenu==1){
-                try{
+                String bandera = null;
+              do{try{
                 System.out.println("Crea tu perfil de La Formula");
                 System.out.print("Ingresa tu Nombre:             ");
                 nombre = lectura.next();
@@ -60,23 +62,35 @@ public class UI {
                 claveAcceso = lectura.next();
                 System.out.print("Ingresa tu edad:               ");
                 edad = lectura.nextInt();
-                System.out.print("Ingresa tu correo electronico (example@correo.com): ");
+                System.out.print("Ingresa tu correo electronico(example@correo.com): ");
                 correo = lectura.next();
                 this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);
                 System.out.println("");
-                System.out.println("Excelente, acabas de crear un perfil en La Formula");
-                System.out.println("");
+                bandera= "Excelente, acabas de crear un perfil";
+                System.out.println(bandera);
                 }catch(NickException | NombreException | EdadException | CorreoException | ClaveException ex){
                     System.out.println(ex.getMessage());
-                }         
+                }
+              }while (bandera== null);
             }
             if(opcMenu==2){
-                
-              System.out.println("1: Haz un comentario");
-              System.out.println("2: Subir Fotografia");
-              System.out.println("3: Cerrar Red Social");    
+              System.out.println("Iniciar sesion");
+              try{
+                System.out.print("Ingresa tu Nick o Correo: ");
+                accesoIni=lectura.next();
+                perfil= this.servicio.buscarUsuario(accesoIni);
+                if(perfil==null){
+                  throw new NickException("El usuario no existe");    
+                }
+              System.out.print("Ingresa tu clave");
+              claveAccesoIni=lectura.next();
+              claveBandera = perfil.getClaveAcceso().equals(claveAccesoIni); 
+              }catch(NickException ex){
+                System.out.println(ex.getMessage());      
+              }
+              System.out.println("1: Haz un comentario. 2: Subir Fotografia.");    
             }
-        }while(opcMenu!=4);
+        }while(opcMenu!=0);
         
     }
 }
