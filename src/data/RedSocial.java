@@ -28,27 +28,17 @@ public class RedSocial {
         this.comentarios= new ArrayList<Comentario>();
         this.fotografias = fotografias;
     }
-    
-    public void crearPerfil(String nombreReal, String nick, int edad, String claveAcceso, String cuentaCorreo) throws NombreException, EdadException, CorreoException, ClaveException, NickException {
-      ArrayList<Comentario> comentariosRealizados = new ArrayList<Comentario>();      
-      ArrayList<Fotografia> fotosSubidas= new ArrayList<Fotografia>();
-      ArrayList<Fotografia> fotosEt= new ArrayList<Fotografia>();
-      PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, edad, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
-      this.usuarios.add(nuevoUsuario);
+
+    public ArrayList<PerfilUsuario> getUsuarios() {
+        return usuarios;
     }
-    
-    public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario){
-      ArrayList<PerfilUsuario> usuariosEt= new ArrayList<PerfilUsuario>();
-      ArrayList<String> personasEt= new ArrayList<String>();
-      Fotografia nuevaFoto= new Fotografia(nombreArchivo,descripcion,usuario,usuariosEt,personasEt);
-      this.fotografias.add(nuevaFoto);
-      usuario.getFotosSubidas().add(nuevaFoto);
+
+    public ArrayList<Comentario> getComentarios() {
+        return comentarios;
     }
-    
-    public void hacerComentario(String texto, Date fechaCreacion, PerfilUsuario usuario){
-      Comentario nuevoComentario = new Comentario(texto,fechaCreacion, usuario);
-      this.comentarios.add(nuevoComentario);
-      usuario.getComentariosRealizados().add(nuevoComentario);
+
+    public ArrayList<Fotografia> getFotografias() {
+        return fotografias;
     }
     
 }

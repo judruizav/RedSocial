@@ -24,8 +24,13 @@ import java.util.*;
  */
 public class UI {
     
+    private Servicio servicio;
+
+    public UI(Servicio servicio)  {
+        this.servicio = servicio;
+    }
     
-    public void menu(RedSocial laFormula, Scanner lectura) throws NombreException{
+    public void menu(Scanner lectura){
         int opcMenu = 0;
         //Crear perfil
         String nombre;
@@ -57,11 +62,11 @@ public class UI {
                 edad = lectura.nextInt();
                 System.out.print("Ingresa tu correo electronico: ");
                 correo = lectura.next();
-                laFormula.crearPerfil(nombre, nick, edad, claveAcceso, correo);
+                this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);
                 System.out.println("");
                 System.out.println("Excelente, acabas de crear un perfil en La Formula");
                 System.out.println("");
-                }catch(NickException | EdadException | ClaveException | CorreoException ex){
+                }catch(NickException | EdadException | ClaveException | CorreoException | NombreException ex){
                     System.out.println(ex.getMessage());
                 }                
             }
