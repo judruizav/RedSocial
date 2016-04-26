@@ -37,11 +37,13 @@ public class PerfilUsuario {
         if(claveAcceso.equals("123456")){
           throw new ClaveException ("La clave no puede ser '123456'");    
         }
-        if(cuentaCorreo.contains("@")){
-            cuentaCorreo.split("@");
-            if(cuentaCorreo.split("@")[1].contains(".com"));
-        }else{
+        if(!cuentaCorreo.contains("@")){
             throw new CorreoException ("El formato del correo es incorrecto");
+        }else{
+            cuentaCorreo.split("@");
+            if(!cuentaCorreo.split("@")[1].contains(".com")){
+                throw new CorreoException ("El formato del correo es incorrecto");
+            }  
         }
         this.nombreReal = nombreReal;
         this.nick= nick;
