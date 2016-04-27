@@ -10,7 +10,8 @@ package Exception;
  * @author IVAN
  */
 public class NombreException extends Exception {
-       public NombreException (String message){
-     super(message);    
-   }    
+   
+    public NombreException (String message){
+        super(message);    
+    }    
 }

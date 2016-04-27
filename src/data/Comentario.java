@@ -16,12 +16,12 @@ public class Comentario {
     private PerfilUsuario usuarioComent;
     
     public Comentario(String texto, Date fechaCreacion, PerfilUsuario usuarioComent) throws ComentarioException{
-      if(texto.length()>200){
-        throw new ComentarioException("El numero de caracteres del comentario no puede ser mayor a 200");    
-      }
-      this.texto= texto;
-      this.fechaCreacion= fechaCreacion;
-      this.usuarioComent= usuarioComent;
+        if(texto.length()>200){
+            throw new ComentarioException("El numero de caracteres del comentario no puede ser mayor a 200");    
+        }
+        this.texto= texto;
+        this.fechaCreacion= fechaCreacion;
+        this.usuarioComent= usuarioComent;
     }
 
     public String getTexto() {
@@ -38,6 +38,6 @@ public class Comentario {
     
     @Override
     public String toString(){
-      return this.texto + "\n" + this.fechaCreacion;    
+        return this.texto + "\n" + this.fechaCreacion;    
     }
 }

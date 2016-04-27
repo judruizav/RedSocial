@@ -49,14 +49,11 @@ public class Fotografia {
     public Servicio getServicio() {
         return servicio;
     }
-    
-   
-    
+
     @Override
     public String toString(){
-      return "Nombre de archivo: " + this.nombreArchivo + "\n" +
-             this.descripcion + "\n" +
-             "Subida por " + this.usuarioFoto.getNombreReal();    
+        return "Nombre de archivo: " + this.nombreArchivo + "\n" +
+        this.descripcion + "\n" +
+        "Subida por " + this.usuarioFoto.getNombreReal();    
     }
-    
 }

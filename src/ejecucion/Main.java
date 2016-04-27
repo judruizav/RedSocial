@@ -34,10 +34,11 @@ public class Main {
         int opcion = 0;
         while(indicador == false){
             menu.menu(scanner);
-               System.out.println("Desea continuar...1. Si 2. No");
-               opcion = scanner.nextInt();
-               if(opcion != 1)
-                  indicador = true;
+            System.out.println("Desea continuar...1. Si 2. No");
+            opcion = scanner.nextInt();
+            if(opcion != 1){
+                indicador = true;
+            }
         }       
     }
 }

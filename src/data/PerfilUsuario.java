@@ -27,15 +27,15 @@ public class PerfilUsuario {
     private ArrayList<Fotografia> fotosEt;
 
     public PerfilUsuario(String nombreReal, String nick, String claveAcceso, int edad, String cuentaCorreo, ArrayList<Comentario> comentariosRealizados, 
-            ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) throws NombreException, EdadException, CorreoException, ClaveException{
+        ArrayList<Fotografia> fotosSubidas, ArrayList<Fotografia> fotosEt) throws NombreException, EdadException, CorreoException, ClaveException{
         if(nombreReal.length()>100){
-          throw new NombreException ("El nombre no puede superar los 100 caracteres");    
+           throw new NombreException ("El nombre no puede superar los 100 caracteres");    
         }
         if(edad<18){
-          throw new EdadException ("Tiene que ser mayor de 18 para crear un perfil");   
+            throw new EdadException ("Tiene que ser mayor de 18 para crear un perfil");   
         }
         if(claveAcceso.equals("123456")){
-          throw new ClaveException ("La clave no puede ser '123456'");    
+            throw new ClaveException ("La clave no puede ser '123456'");    
         }
         if(!cuentaCorreo.contains("@")){
             throw new CorreoException ("El formato del correo es incorrecto");
@@ -85,10 +85,9 @@ public class PerfilUsuario {
     
     @Override
     public String toString(){
-      return "Nombre: " + this.nombreReal +"\n"+
-             "Nick: " + this.nick + "\n" +
-             "Edad: " + this.edad + "\n" +
-             "Correo: " + this.cuentaCorreo + "\n";    
+        return "Nombre: " + this.nombreReal +"\n"+
+               "Nick: " + this.nick + "\n" +
+               "Edad: " + this.edad + "\n" +
+               "Correo: " + this.cuentaCorreo + "\n";    
     }
-    
 }

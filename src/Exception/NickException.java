@@ -10,7 +10,8 @@ package Exception;
  * @author IVAN
  */
 public class NickException extends Exception {
-       public NickException(String message){
-     super(message);    
-   }    
+    
+    public NickException(String message){
+        super(message);    
+    }    
 }

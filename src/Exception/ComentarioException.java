@@ -12,7 +12,6 @@ package Exception;
 public class ComentarioException extends Exception{
     
     public ComentarioException(String message){
-      super(message);    
+        super(message);    
     }    
-    
 }

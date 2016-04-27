@@ -10,8 +10,8 @@ package Exception;
  * @author IVAN
  */
 public class ClaveException extends Exception {
-    public ClaveException (String message ){
-          super(message);   
     
-  }
+    public ClaveException (String message ){
+        super(message);   
+    }
 }

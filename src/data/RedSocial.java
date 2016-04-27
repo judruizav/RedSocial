@@ -40,5 +40,4 @@ public class RedSocial {
     public ArrayList<Fotografia> getFotografias() {
         return fotografias;
     }
-    
 }

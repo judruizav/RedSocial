@@ -10,8 +10,8 @@ package Exception;
  * @author IVAN
  */
 public class CorreoException extends Exception {
+   
     public CorreoException (String message ){
-          super(message);   
-    
-  }
+        super(message);   
+    }
 }

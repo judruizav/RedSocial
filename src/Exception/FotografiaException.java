@@ -12,7 +12,6 @@ package Exception;
 public class FotografiaException extends Exception{
     
     public FotografiaException(String message){
-      super(message);    
+        super(message);    
     }
-    
 }

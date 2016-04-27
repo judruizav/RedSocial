@@ -10,7 +10,8 @@ package Exception;
  * @author IVAN
  */
 public class EdadException extends Exception {
+   
     public EdadException (String message ){
-          super(message);   
+        super(message);   
     }
 }
