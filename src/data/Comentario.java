@@ -5,6 +5,7 @@
  */
 package data;
 import java.util.Date;
+import Exception.ComentarioException;
 /**
  *
  * @author Julian
@@ -14,7 +15,10 @@ public class Comentario {
     private Date fechaCreacion;
     private PerfilUsuario usuarioComent;
     
-    public Comentario(String texto, Date fechaCreacion, PerfilUsuario usuarioComent){
+    public Comentario(String texto, Date fechaCreacion, PerfilUsuario usuarioComent) throws ComentarioException{
+      if(texto.length()>200){
+        throw new ComentarioException("El numero de caracteres del comentario no puede ser mayor a 200");    
+      }
       this.texto= texto;
       this.fechaCreacion= fechaCreacion;
       this.usuarioComent= usuarioComent;

@@ -42,7 +42,7 @@ public class UI {
         String accesoIni;
         String claveAccesoIni;
         PerfilUsuario perfil= null;
-        boolean claveBandera;
+        int opcMenuIni;
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
@@ -73,22 +73,49 @@ public class UI {
                 }
               }while (bandera== null);
             }
-            if(opcMenu==2){
+            if(opcMenu==2){  
+              String banderaIni=null;  
               System.out.println("Iniciar sesion");
-              try{
+              do{try{
                 System.out.print("Ingresa tu Nick o Correo: ");
                 accesoIni=lectura.next();
                 perfil= this.servicio.buscarUsuario(accesoIni);
                 if(perfil==null){
                   throw new NickException("El usuario no existe");    
                 }
-              System.out.print("Ingresa tu clave");
-              claveAccesoIni=lectura.next();
-              claveBandera = perfil.getClaveAcceso().equals(claveAccesoIni); 
-              }catch(NickException ex){
-                System.out.println(ex.getMessage());      
+                System.out.print("Ingresa tu clave");
+                claveAccesoIni=lectura.next();
+                if(!perfil.getClaveAcceso().equals(claveAccesoIni)){
+                  throw new ClaveException("Clave incorrecta");    
+                }
+                banderaIni="Bienvenido " + perfil.getNombreReal();
+                System.out.println(banderaIni);
+                }catch(NickException | ClaveException ex){
+                  System.out.println(ex.getMessage());      
+                }
+              }while(banderaIni==null); 
+              System.out.println("1: Haz un comentario. 2: Subir Fotografia.  3: Ver informacion de perfil.");
+              opcMenuIni=lectura.nextInt();
+              if(opcMenuIni==1){
+                String textoComentario;
+                String banderaComentario= null;
+              do{try{
+                System.out.print("Escribe un comentario: ");
+                textoComentario=lectura.nextLine();
+                this.servicio.hacerComentario(textoComentario, perfil);
+                banderaComentario="Comentario realizado";
+                System.out.println(banderaComentario);
+                }catch(ComentarioException ex){
+                  System.out.println(ex.getMessage());
+                }
+              }while(banderaComentario!=null);  
               }
-              System.out.println("1: Haz un comentario. 2: Subir Fotografia.");    
+              if(opcMenuIni==2){
+                  
+              }
+              if(opcMenuIni==3){
+                  
+              }
             }
         }while(opcMenu!=0);
         

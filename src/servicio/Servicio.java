@@ -9,6 +9,7 @@ import Exception.CorreoException;
 import Exception.EdadException;
 import Exception.NickException;
 import Exception.NombreException;
+import Exception.ComentarioException;
 import data.PerfilUsuario;
 import data.Fotografia;
 import data.Comentario;
@@ -95,8 +96,8 @@ public class Servicio {
       fotografia.getPersonasEt().add(nombre);
     }
     
-    public void hacerComentario(String texto, Date fechaCreacion, PerfilUsuario usuario){
-      Comentario nuevoComentario = new Comentario(texto,fechaCreacion, usuario);
+    public void hacerComentario(String texto, PerfilUsuario usuario) throws ComentarioException{
+      Comentario nuevoComentario = new Comentario(texto,new Date(), usuario);
       this.redSocial.getComentarios().add(nuevoComentario);
       usuario.getComentariosRealizados().add(nuevoComentario);
     }
