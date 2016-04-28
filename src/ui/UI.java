@@ -98,7 +98,7 @@ public class UI {
                         System.out.println(ex.getMessage());      
                     }
                 }while(banderaIni==null); 
-                System.out.println("1: Haz un comentario. 2: Subir Fotografia.  3: Ver informacion de perfil.");
+                System.out.println("1: Haz un comentario. 2: Subir fotografia. 3:Etiquetar fotografia. 4: Ver informacion de perfil.");
                 opcMenuIni=lectura.nextInt();
                 if(opcMenuIni==1){
                     String textoComentario;
@@ -116,6 +116,7 @@ public class UI {
                     }while(banderaComentario!=null);  
                 }
                 if(opcMenuIni==2){
+                   System.out.println("Subir una foto");
                    int opcFoto=0;
                    String nombreArchivo;
                    String descripcion;
@@ -133,11 +134,23 @@ public class UI {
                            System.out.println(ex.getMessage());
                        }
                     }while(banderaFoto==null);
-                   System.out.println("Desea etiquetar? ");
-                   System.out.println("1: Sí       2: No");
-                   if(opcFoto==1){
-                       
-                   }
+                }
+                if(opcMenuIni==3){
+                   String nombreArchivEt;
+                   Fotografia fotoEt=null;
+                   System.out.println("Etiquetar una foto");
+                   do{
+                     try{
+                       System.out.println("Ingrese el nombre de archivo de la foto que quiere etiquetar: ");
+                       nombreArchivEt=lectura.next();
+                       fotoEt = this.servicio.buscarFoto(nombreArchivEt, perfil, perfil.getFotosSubidas());
+                       if(fotoEt==null){
+                         throw new FotografiaException("Foto no encontrada");    
+                       }
+                     }catch(FotografiaException ex){
+                       System.out.println(ex.getMessage());        
+                     }
+                   }while(fotoEt==null);            
                 }
                 if(opcMenuIni==3){
                     

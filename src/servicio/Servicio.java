@@ -42,6 +42,16 @@ public class Servicio {
         return usuarioEncontrado;
     }
     
+    public Fotografia buscarFoto(String buscar, PerfilUsuario usuario, ArrayList<Fotografia> fotos){
+      Fotografia fotoEncontrada= null;
+      for(int i=0; i<fotos.size(); i++){
+        if(fotos.get(i).getNombreArchivo().equals(buscar)){
+          fotoEncontrada = fotos.get(i);    
+        }      
+      }
+      return fotoEncontrada;      
+    }
+    
     public String imprimirUsuarios(ArrayList<PerfilUsuario> usuarios){
         String imprimir="";
         for(int i=0; i<usuarios.size(); i++){
@@ -89,18 +99,23 @@ public class Servicio {
     } 
     
     public void etiquetarFotografiaUsuario(ArrayList<String> nombres, Fotografia fotografia)throws EtiquetaException{
+        ArrayList<PerfilUsuario> usuariosBuscados= new ArrayList<PerfilUsuario>();
         if(nombres.size()<2 || nombres.size()>5){
             throw new EtiquetaException ("Debe etiquetar al menos 2 usuarios y máximo 5");
         }
-        PerfilUsuario temporal=null;
+        PerfilUsuario temp=null;
         for(int i=0; i<nombres.size(); i++){
-            temporal = buscarUsuario(nombres.get(i));
-            if(temporal==null){
-                throw new EtiquetaException("Usuario no encontrado");
-            }
-            fotografia.getUsuariosEt().add(temporal);
-            temporal.getFotosEt().add(fotografia);
+            temp = buscarUsuario(nombres.get(i));
+            usuariosBuscados.add(temp);
         }
+        for(int h=0; h<nombres.size(); h++){
+           if(usuariosBuscados.get(h)==null){
+               throw new EtiquetaException("El usuario " + nombres.get(h) + "no tiene un perfil");            
+           }
+           fotografia.getUsuariosEt().add(usuariosBuscados.get(h));
+           usuariosBuscados.get(h).getFotosEt().add(fotografia);
+        }
+            
     }
     
     public void etiquetarFotografiaPersona(ArrayList<String> nombres, Fotografia fotografia) throws EtiquetaException{
