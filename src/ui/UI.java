@@ -13,6 +13,7 @@ import Exception.NickException;
 import Exception.FotografiaException;
 import servicio.Servicio;
 import Exception.NombreException;
+import Exception.EtiquetaException;
 import data.Comentario;
 import data.Fotografia;
 import data.PerfilUsuario;
@@ -150,10 +151,70 @@ public class UI {
                      }catch(FotografiaException ex){
                        System.out.println(ex.getMessage());        
                      }
-                   }while(fotoEt==null);            
+                   }while(fotoEt==null);
+                     int opcEt=1;
+                     String banderaEt=null;
+                     ArrayList<String> nombresEt= new ArrayList<String>();
+                     do{
+                       System.out.println("Ingrese los nombres de los usuarios a etiquetar");
+                       try{
+                         while(opcEt==1){
+                           String nombreTemp= lectura.nextLine();
+                           nombresEt.add(nombreTemp);
+                           System.out.println("Desea seguir etiquetando? 1:Si. 0:No.");
+                           opcEt=lectura.nextInt();
+                          }
+                         this.servicio.etiquetarFotografiaUsuario(nombresEt, fotoEt);
+                         banderaEt="";
+                         for(int i=0; i<nombresEt.size(); i++){
+                           banderaEt+="Se ha etiquetado a " + nombresEt.get(i) + " correctamente \n";    
+                         }
+                         System.out.println(banderaEt);
+                       }catch (EtiquetaException ex){
+                         System.out.println(ex.getMessage());
+                       }
+                     }while(banderaEt==null);
+                    String banderaEt1=null;  
+                    int opcEt1=1;
+                    do{
+                      try{
+                        System.out.println("Ingrese los nombres de las personas sin perfil que desea etiquetar"
+                        + "(Debe haber al menos uno)");
+                        ArrayList<String> personasEt= new ArrayList<String>();
+                        while(opcEt1==1){
+                          String nombreTemp= lectura.nextLine();
+                          personasEt.add(nombreTemp);
+                          System.out.println("Desea seguir etiquetando? 1:Si. 0:No.");
+                          opcEt1=lectura.nextInt();         
+                        }  
+                      this.servicio.etiquetarFotografiaPersona(nombresEt, fotoEt);
+                      banderaEt1="";
+                      for(int i=0; i<nombresEt.size(); i++){
+                        banderaEt1+="Se ha etiquetado a " + nombresEt.get(i) + " correctamente \n";    
+                      }
+                      System.out.println(banderaEt1);
+                      }catch (EtiquetaException ex){
+                        System.out.println(ex.getMessage());        
+                      }
+                    }while(banderaEt1==null);      
                 }
-                if(opcMenuIni==3){
-                    
+                if(opcMenuIni==4){
+                  int menuInfo;  
+                  System.out.println(perfil.toString());
+                  System.out.println("1:Ver comentarios publicados. 2:Ver fotos subidas. 3:Ver fotos en las que se le ha etiquetado.");
+                  menuInfo=lectura.nextInt();
+                  if(menuInfo==1){
+                    System.out.println("Comentarios realizados");  
+                    System.out.println(this.servicio.imprimirComentarios(perfil.getComentariosRealizados()));    
+                  }
+                  if(menuInfo==2){
+                    System.out.println("Fotos subidas"); 
+                    System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas())); 
+                  }
+                  if(menuInfo==3){
+                    System.out.println("Fotos en las que ha sido etiquetado"); 
+                    System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas()));     
+                  }
                 }
             }
         }while(opcMenu!=0);    

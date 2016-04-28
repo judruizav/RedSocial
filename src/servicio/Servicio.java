@@ -120,13 +120,10 @@ public class Servicio {
     
     public void etiquetarFotografiaPersona(ArrayList<String> nombres, Fotografia fotografia) throws EtiquetaException{
         if(nombres.size()<1){
-            throw new EtiquetaException ("Debe etiquetar al menos 2 usuarios y máximo 5");
+            throw new EtiquetaException ("Debe etiquetar al menos una persona sin perfil ");
         }
         for(int i=0; i<nombres.size(); i++){
           fotografia.getPersonasEt().add(nombres.get(i));    
-        }
-        if(fotografia.getPersonasEt().size()<1){
-            throw new EtiquetaException ("Debe etiquetar al menos una persona persona sin perfil");
         }
     }
     
