@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package data;
+import Exception.EtiquetaException;
+import Exception.FotografiaException;
 import java.util.ArrayList;
 import servicio.Servicio;
 /**
@@ -18,7 +20,11 @@ public class Fotografia {
     private ArrayList<String> personasEt;
     private Servicio servicio= new Servicio();
 
-    public Fotografia(String nombreArchivo, String descripcion, PerfilUsuario usuarioFoto, ArrayList<PerfilUsuario> usuariosEt, ArrayList<String> personasEt) {
+    public Fotografia(String nombreArchivo, String descripcion, PerfilUsuario usuarioFoto, ArrayList<PerfilUsuario> usuariosEt, ArrayList<String> personasEt) throws FotografiaException {
+        if(descripcion.length()>200){
+            throw new FotografiaException ("El numero maximo de caracteres permitido en la descripcion es 200 D:");
+        }
+        
         this.nombreArchivo = nombreArchivo;
         this.descripcion = descripcion;
         this.usuarioFoto = usuarioFoto;

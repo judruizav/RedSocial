@@ -9,7 +9,8 @@ import Exception.ClaveException;
 import Exception.ComentarioException;
 import Exception.CorreoException;
 import Exception.EdadException;
-import Exception.NickException;        
+import Exception.NickException;   
+import Exception.FotografiaException;
 import servicio.Servicio;
 import Exception.NombreException;
 import data.Comentario;
@@ -86,7 +87,7 @@ public class UI {
                         if(perfil==null){
                             throw new NickException("El usuario no existe");    
                         }
-                        System.out.print("Ingresa tu clave");
+                        System.out.print("Ingresa tu clave: ");
                         claveAccesoIni=lectura.next();
                         if(!perfil.getClaveAcceso().equals(claveAccesoIni)){
                             throw new ClaveException("Clave incorrecta");    
@@ -115,7 +116,28 @@ public class UI {
                     }while(banderaComentario!=null);  
                 }
                 if(opcMenuIni==2){
-                    
+                   int opcFoto=0;
+                   String nombreArchivo;
+                   String descripcion;
+                   String banderaFoto=null;
+                   do{
+                       try{
+                           System.out.println("Nombre del Archivo: ");
+                           nombreArchivo=lectura.next();
+                           System.out.println("Ingrese descripcion: ");
+                           descripcion=lectura.nextLine();
+                           this.servicio.subirFotografia(nombreArchivo, descripcion, perfil);
+                           banderaFoto= "Foto subida exitosamente";
+                           System.out.println(banderaFoto);
+                       }catch(FotografiaException ex){
+                           System.out.println(ex.getMessage());
+                       }
+                    }while(banderaFoto==null);
+                   System.out.println("Desea etiquetar? ");
+                   System.out.println("1: Sí       2: No");
+                   if(opcFoto==1){
+                       
+                   }
                 }
                 if(opcMenuIni==3){
                     
@@ -124,3 +146,4 @@ public class UI {
         }while(opcMenu!=0);    
     }
 }
+ 

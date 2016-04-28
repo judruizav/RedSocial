@@ -10,6 +10,8 @@ import Exception.EdadException;
 import Exception.NickException;
 import Exception.NombreException;
 import Exception.ComentarioException;
+import Exception.EtiquetaException;
+import Exception.FotografiaException;
 import data.PerfilUsuario;
 import data.Fotografia;
 import data.Comentario;
@@ -78,7 +80,7 @@ public class Servicio {
         this.redSocial.getUsuarios().add(nuevoUsuario);
     }
     
-    public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario){
+    public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario)throws FotografiaException{
         ArrayList<PerfilUsuario> usuariosEt= new ArrayList<PerfilUsuario>();
         ArrayList<String> personasEt= new ArrayList<String>();
         Fotografia nuevaFoto= new Fotografia(nombreArchivo,descripcion,usuario,usuariosEt,personasEt);
@@ -86,14 +88,31 @@ public class Servicio {
         usuario.getFotosSubidas().add(nuevaFoto);
     } 
     
-    public void etiquetarFotografiaUsuario(String nombre, Fotografia fotografia){
-        PerfilUsuario usuarioEt = buscarUsuario(nombre);
-        fotografia.getUsuariosEt().add(usuarioEt);
-        usuarioEt.getFotosEt().add(fotografia);
+    public void etiquetarFotografiaUsuario(ArrayList<String> nombres, Fotografia fotografia)throws EtiquetaException{
+        if(nombres.size()<2 || nombres.size()>5){
+            throw new EtiquetaException ("Debe etiquetar al menos 2 usuarios y máximo 5");
+        }
+        PerfilUsuario temporal=null;
+        for(int i=0; i<nombres.size(); i++){
+            temporal = buscarUsuario(nombres.get(i));
+            if(temporal==null){
+                throw new EtiquetaException("Usuario no encontrado");
+            }
+            fotografia.getUsuariosEt().add(temporal);
+            temporal.getFotosEt().add(fotografia);
+        }
     }
     
-    public void etiquetarFotografiaPersona(String nombre, Fotografia fotografia){
-        fotografia.getPersonasEt().add(nombre);
+    public void etiquetarFotografiaPersona(ArrayList<String> nombres, Fotografia fotografia) throws EtiquetaException{
+        if(nombres.size()<1){
+            throw new EtiquetaException ("Debe etiquetar al menos 2 usuarios y máximo 5");
+        }
+        for(int i=0; i<nombres.size(); i++){
+          fotografia.getPersonasEt().add(nombres.get(i));    
+        }
+        if(fotografia.getPersonasEt().size()<1){
+            throw new EtiquetaException ("Debe etiquetar al menos una persona persona sin perfil");
+        }
     }
     
     public void hacerComentario(String texto, PerfilUsuario usuario) throws ComentarioException{
