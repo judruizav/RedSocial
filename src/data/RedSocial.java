@@ -6,19 +6,12 @@
 package data;
 
 import java.util.ArrayList;
-import java.util.Date;
-import Exception.ClaveException;
-import Exception.CorreoException;
-import Exception.EdadException;
-import Exception.NickException;
-import Exception.NombreException;
-import Exception.ComentarioException;
-import Exception.FotografiaException;
 /**
  *
  * @author Julian
  */
 public class RedSocial {
+    
     private ArrayList<PerfilUsuario> usuarios;
     private ArrayList<Comentario> comentarios;
     private ArrayList<Fotografia> fotografias;

@@ -4,15 +4,6 @@
  * and open the template in the editor.
  */
 package ejecucion;
-import data.RedSocial;
-import data.Fotografia;
-import Exception.ClaveException;
-import Exception.CorreoException;
-import Exception.EdadException;
-import Exception.NickException;
-import Exception.NombreException;
-import Exception.ComentarioException;
-import Exception.FotografiaException;
 import java.util.*;
 import servicio.Servicio;
 import ui.UI;

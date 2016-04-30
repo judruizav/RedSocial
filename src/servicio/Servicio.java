@@ -43,13 +43,13 @@ public class Servicio {
     }
     
     public Fotografia buscarFoto(String buscar, PerfilUsuario usuario, ArrayList<Fotografia> fotos){
-      Fotografia fotoEncontrada= null;
-      for(int i=0; i<fotos.size(); i++){
-        if(fotos.get(i).getNombreArchivo().equals(buscar)){
-          fotoEncontrada = fotos.get(i);    
-        }      
-      }
-      return fotoEncontrada;      
+        Fotografia fotoEncontrada= null;
+        for(int i=0; i<fotos.size(); i++){
+            if(fotos.get(i).getNombreArchivo().equals(buscar)){
+                fotoEncontrada = fotos.get(i);    
+            }      
+        }
+        return fotoEncontrada;      
     }
     
     public String imprimirUsuarios(ArrayList<PerfilUsuario> usuarios){
@@ -123,7 +123,7 @@ public class Servicio {
             throw new EtiquetaException ("Debe etiquetar al menos una persona sin perfil ");
         }
         for(int i=0; i<nombres.size(); i++){
-          fotografia.getPersonasEt().add(nombres.get(i));    
+            fotografia.getPersonasEt().add(nombres.get(i));    
         }
     }
     

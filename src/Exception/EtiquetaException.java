@@ -10,6 +10,7 @@ package Exception;
  * @author IVAN
  */
 public class EtiquetaException extends Exception{
+    
     public EtiquetaException(String message){
         super(message);    
     }

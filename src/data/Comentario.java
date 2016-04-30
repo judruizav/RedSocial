@@ -11,6 +11,7 @@ import Exception.ComentarioException;
  * @author Julian
  */
 public class Comentario {
+    
     private String texto;
     private Date fechaCreacion;
     private PerfilUsuario usuarioComent;

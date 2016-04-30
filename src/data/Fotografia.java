@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package data;
-import Exception.EtiquetaException;
 import Exception.FotografiaException;
 import java.util.ArrayList;
 import servicio.Servicio;
@@ -13,6 +12,7 @@ import servicio.Servicio;
  * @author Julian
  */
 public class Fotografia {
+    
     private String nombreArchivo;
     private String descripcion;
     private PerfilUsuario usuarioFoto;
