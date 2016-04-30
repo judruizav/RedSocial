@@ -107,19 +107,11 @@ public class Servicio {
         for(int i=0; i<nombres.size(); i++){
             temp = buscarUsuario(nombres.get(i));
             usuariosBuscados.add(temp);
-        }
-        for(int h=0; h<nombres.size(); h++){
-           if(usuariosBuscados.get(h)==null){
-               throw new EtiquetaException("El usuario " + nombres.get(h) + "no tiene un perfil");            
-           }
-           fotografia.getUsuariosEt().add(usuariosBuscados.get(h));
-           usuariosBuscados.get(h).getFotosEt().add(fotografia);
-        }
-            
+        }            
     }
     
     public void etiquetarFotografiaPersona(ArrayList<String> nombres, Fotografia fotografia) throws EtiquetaException{
-        if(nombres.size()<1){
+        if(nombres.isEmpty()){
             throw new EtiquetaException ("Debe etiquetar al menos una persona sin perfil ");
         }
         for(int i=0; i<nombres.size(); i++){

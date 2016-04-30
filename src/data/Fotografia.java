@@ -58,8 +58,28 @@ public class Fotografia {
 
     @Override
     public String toString(){
+        String acum1="";
+        String acum2="";
+        if(this.usuariosEt.isEmpty()){
+          acum1+="No hay usuarios etiquetados";     
+        }else{
+          for(int i=0; i<(this.usuariosEt.size()-1); i++){
+            acum1+=this.usuariosEt.get(i).getNombreReal() + ",";
+          }
+        acum1+= this.usuariosEt.get(this.usuariosEt.size()-1).getNombreReal();
+        }
+        if(this.personasEt.isEmpty()){
+          acum2+="No hay personas etiquetadas";     
+        }else{
+          for(int i=0; i<(this.personasEt.size()-1); i++){
+            acum2+=this.personasEt.get(i) + ",";
+          }
+        acum2+= this.personasEt.get(this.personasEt.size()-1);
+        }
         return "Nombre de archivo: " + this.nombreArchivo + "\n" +
         this.descripcion + "\n" +
-        "Subida por " + this.usuarioFoto.getNombreReal();    
+        "Subida por " + this.usuarioFoto.getNombreReal() + "\n" +
+        "Usuarios etiquetados: " +  acum1 + "\n" +
+        "Personas etiquetadas: " +  acum2;     
     }
 }

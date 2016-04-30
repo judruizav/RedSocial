@@ -17,7 +17,7 @@ import Exception.EtiquetaException;
 import data.Fotografia;
 import data.PerfilUsuario;
 import java.util.*;
-
+import java.io.BufferedReader;
 /**
  *
  * @author La Formula de Pina Records
@@ -31,8 +31,7 @@ public class UI {
     }
     
     public void menu(Scanner lectura){
-        
-        int opcMenu;
+        int opcMenu=3;
         //Crear perfil
         String nombre;
         String nick;
@@ -47,10 +46,12 @@ public class UI {
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
-            System.out.println("Menu:");
-            System.out.println("1: Crea tu perfil. 2: Inicia sesion. 0: Salir ");
-            opcMenu= lectura.nextInt();
-            System.out.println("");
+           if(opcMenu==3){
+             System.out.println("Menu:");
+             System.out.println("1: Crea tu perfil. 2: Inicia sesion. 0: Salir ");
+             opcMenu= lectura.nextInt();
+             System.out.println("");
+           }
             if(opcMenu==1){
                 String bandera = null;
                 do{
@@ -69,12 +70,15 @@ public class UI {
                         correo = lectura.next();
                         this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);
                         bandera= "Excelente, acabas de crear un perfil en La Formula";
+                        opcMenu=3;
                         System.out.println("");
                         System.out.println(bandera);
                     }catch(NickException | NombreException | EdadException | CorreoException | ClaveException ex){
                         System.out.println(ex.getMessage());
+                        System.out.println("1. Volver a ingresar los datos. 3.Volver al menu principal. 0.Salir");
+                        opcMenu=lectura.nextInt();
                     }
-                }while (bandera== null);
+                }while (bandera== null&&opcMenu==1);
             }
             if(opcMenu==2){  
                 String banderaIni=null;  
@@ -98,41 +102,44 @@ public class UI {
                         System.out.println("");
                         System.out.println(banderaIni);
                     }catch(NickException | ClaveException ex){
-                        System.out.println(ex.getMessage());      
+                        System.out.println(ex.getMessage());
+                        System.out.println("2. Volver a ingresar datos. 3.Volver al menu principal. 0.Salir");
+                        opcMenu=lectura.nextInt();
                     }
-                }while(banderaIni==null); 
-                System.out.println("1: Haz un comentario.");
-                System.out.println("2: Subir fotografia.");
-                System.out.println("3: Etiquetar fotografia.");
-                System.out.println("4: Ver informacion de perfil.");
-                System.out.println("5: Cerrar sesion.");
-                opcMenuIni=lectura.nextInt();
-                do{
+                }while(banderaIni==null&&opcMenu==2); 
+                if(perfil!=null){
+                do{  
+                  opcMenuIni=0;
+                  if(opcMenuIni==0){
+                    System.out.println("1: Haz un comentario.");
+                    System.out.println("2: Subir fotografia.");
+                    System.out.println("3: Etiquetar fotografia.");
+                    System.out.println("4: Ver informacion de perfil.");
+                    System.out.println("5: Cerrar sesion.");
+                    opcMenuIni=lectura.nextInt();
+                  }  
                     if(opcMenuIni==1){
-                        int opcionSubMenu1 = 0;
-                        do{
                             String textoComentario;
                             String banderaComentario=null;
                             do{
                                 try{
                                     System.out.print("Escribe un comentario: ");
-                                    textoComentario=lectura.nextLine();
+                                    textoComentario=lectura.next();
                                     this.servicio.hacerComentario(textoComentario, perfil);
                                     banderaComentario="Comentario realizado";
                                     System.out.println(banderaComentario);
                                 }catch(ComentarioException ex){
                                     System.out.println(ex.getMessage());
+                                    System.out.println("1: Volver a realizar el comentario. 0: Ir al menu anterior.");
+                                    opcMenuIni = lectura.nextInt();
                                 }
-                            }while(banderaComentario!=null);
-                            System.out.println("1: Realizar otro comentario. 2: Ir al menu anterior.");
-                                opcionSubMenu1 = lectura.nextInt();
-                        }while(opcionSubMenu1==1);
+                            }while(banderaComentario==null&&opcMenuIni==1);
+                            System.out.println("1: Realizar otro comentario. 0: Ir al menu anterior.");
+                            opcMenuIni = lectura.nextInt();
                     }
                     if(opcMenuIni==2){
-                        int opcionSubMenu2=0;
                         do{
                             System.out.println("Subir una foto");
-                            int opcFoto=0;
                             String nombreArchivo;
                             String descripcion;
                             String banderaFoto=null;
@@ -141,21 +148,21 @@ public class UI {
                                     System.out.println("Nombre del Archivo: ");
                                     nombreArchivo=lectura.next();
                                     System.out.println("Ingrese descripcion: ");
-                                    descripcion=lectura.nextLine();
+                                    descripcion=lectura.next();
                                     this.servicio.subirFotografia(nombreArchivo, descripcion, perfil);
                                     banderaFoto= "Foto subida exitosamente";
                                     System.out.println(banderaFoto);
                                 }catch(FotografiaException ex){
                                     System.out.println(ex.getMessage());
+                                     System.out.println("2: Volver a subir la foto. 0: Volver al menu anterior.");
+                                     opcMenuIni = lectura.nextInt();                                    
                                 }
-                            }while(banderaFoto==null);
-                            System.out.println("1: Subir otra foto. 2: Volver al menu anterior.");
-                            opcionSubMenu2 = lectura.nextInt();
-                        }while(opcionSubMenu2==1);
+                            }while(banderaFoto==null&&opcMenuIni==2);
+                            System.out.println("2: Subir otra foto. 0: Volver al menu anterior.");
+                            opcMenuIni = lectura.nextInt();
+                        }while(opcMenuIni==2);
                     }
                     if(opcMenuIni==3){
-                        int opcionSubMenu3=0;
-                        do{
                             String nombreArchivEt;
                             Fotografia fotoEt=null;
                             System.out.println("Etiquetar una foto");
@@ -165,20 +172,26 @@ public class UI {
                                     nombreArchivEt=lectura.next();
                                     fotoEt = this.servicio.buscarFoto(nombreArchivEt, perfil, perfil.getFotosSubidas());
                                     if(fotoEt==null){
-                                        throw new FotografiaException("Foto no encontrada");    
+                                        throw new FotografiaException("Foto no encontrada");
                                     }
                                 }catch(FotografiaException ex){
-                                    System.out.println(ex.getMessage());        
+                                    System.out.println(ex.getMessage());
+                                    System.out.println("3: Volver a cargar foto. 0: Volver al menu anterior.");
+                                    opcMenuIni = lectura.nextInt();                                                                        
                                 }
-                            }while(fotoEt==null);
-                            int opcEt=1;
-                            String banderaEt=null;
-                            ArrayList<String> nombresEt= new ArrayList<String>();
-                            do{
-                                System.out.println("Ingrese los nombres de los usuarios a etiquetar");
+                            }while(fotoEt==null&&opcMenuIni==3);
+                            if(fotoEt!=null){
+                              int opcEt=1;
+                              String banderaEt=null;
+                              ArrayList<String> nombresEt= new ArrayList<String>();
+                              do{
                                 try{
+                                    System.out.println("Ingrese los nicks de los usuarios a etiquetar");
                                     while(opcEt==1){
-                                        String nombreTemp= lectura.nextLine();
+                                        String nombreTemp= lectura.next();
+                                        if(this.servicio.buscarUsuario(nombreTemp)==null){
+                                          throw new EtiquetaException("El usuario " + nombreTemp + "no tiene un perfil");    
+                                        }
                                         nombresEt.add(nombreTemp);
                                         System.out.println("Desea seguir etiquetando? 1:Si. 0:No.");
                                         opcEt=lectura.nextInt();
@@ -191,55 +204,96 @@ public class UI {
                                     System.out.println(banderaEt);
                                 }catch (EtiquetaException ex){
                                     System.out.println(ex.getMessage());
+                                    System.out.println("3: Volver a etiquetar foto. 0: Volver al menu anterior.");
+                                    opcMenuIni = lectura.nextInt(); 
                                 }
-                            }while(banderaEt==null);
+                            }while(banderaEt==null&&opcMenuIni==3);
                             String banderaEt1=null;  
                             int opcEt1=1;
+                            if(banderaEt!=null){
                             do{
                                 try{
                                     System.out.println("Ingrese los nombres de las personas sin perfil que desea etiquetar"
                                     + "(Debe haber al menos uno)");
                                     ArrayList<String> personasEt= new ArrayList<String>();
                                     while(opcEt1==1){
-                                        String nombreTemp= lectura.nextLine();
+                                        String nombreTemp= lectura.next();
                                         personasEt.add(nombreTemp);
                                         System.out.println("Desea seguir etiquetando? 1:Si. 0:No.");
                                         opcEt1=lectura.nextInt();         
                                     }  
-                                    this.servicio.etiquetarFotografiaPersona(nombresEt, fotoEt);
+                                    this.servicio.etiquetarFotografiaPersona(personasEt, fotoEt);
                                     banderaEt1="";
-                                    for(int i=0; i<nombresEt.size(); i++){
-                                        banderaEt1+="Se ha etiquetado a " + nombresEt.get(i) + " correctamente \n";    
+                                    for(int i=0; i<personasEt.size(); i++){
+                                        banderaEt1+="Se ha etiquetado a " + personasEt.get(i) + " correctamente \n";    
                                     }
                                     System.out.println(banderaEt1);
                                 }catch (EtiquetaException ex){
-                                    System.out.println(ex.getMessage());        
+                                    System.out.println(ex.getMessage());
+                                    System.out.println("3: Volver a cargar foto. 0: Volver al menu anterior.");
+                                    opcMenuIni = lectura.nextInt(); 
                                 }
-                            }while(banderaEt1==null);
-                            System.out.println("1: Etiquetar otra foto. 2: Volver al menu anterior.");
-                            opcionSubMenu3 = lectura.nextInt();
-                        }while(opcionSubMenu3==1);
+                            }while(banderaEt1==null&&opcMenuIni==3);
+                            }
+                            if(banderaEt!=null&&banderaEt1!=null){
+                              System.out.println("3: Etiquetar otra foto. 0: Volver al menu anterior.");
+                              opcMenuIni = lectura.nextInt();
+                            }
+                          }  
                     }
                     if(opcMenuIni==4){
-                        int menuInfo;  
-                        System.out.println(perfil.toString());
-                        System.out.println("1:Ver comentarios publicados. 2:Ver fotos subidas. 3:Ver fotos en las que se le ha etiquetado.");
+                        int menuInfo;
+                      do{
+                        System.out.println("1:Ver info del perfil.\n2:Ver comentarios publicados.\n3:Ver fotos subidas.\n4:Ver fotos en las que se le ha etiquetado.");
                         menuInfo=lectura.nextInt();
                         if(menuInfo==1){
-                            System.out.println("Comentarios realizados");  
-                            System.out.println(this.servicio.imprimirComentarios(perfil.getComentariosRealizados()));    
+                          System.out.println(perfil.toString());    
                         }
                         if(menuInfo==2){
-                            System.out.println("Fotos subidas"); 
-                            System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas())); 
+                          try{        
+                            if(perfil.getComentariosRealizados().isEmpty()){
+                              throw new ComentarioException("No tiene comentarios actualmente");    
+                            }
+                            System.out.println("Comentarios realizados");  
+                            System.out.println(this.servicio.imprimirComentarios(perfil.getComentariosRealizados()));                            
+                          }catch(ComentarioException ex){
+                            System.out.println(ex.getMessage());
+                          }
                         }
                         if(menuInfo==3){
-                            System.out.println("Fotos en las que ha sido etiquetado"); 
-                            System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas()));     
+                          try{    
+                            if(perfil.getFotosSubidas().isEmpty()){
+                              throw new FotografiaException("No tiene fotos actualmente");    
+                            }                      
+                            System.out.println("Fotos subidas"); 
+                            System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas()));
+                          }catch(FotografiaException ex){
+                            System.out.println(ex.getMessage());
+                          }
                         }
+                        if(menuInfo==4){
+                          try{    
+                            if(perfil.getFotosEt().isEmpty()){
+                              throw new EtiquetaException("No aparece en ninguna foto actualmente");    
+                            }      
+                            System.out.println("Fotos en las que ha sido etiquetado"); 
+                            System.out.println(this.servicio.imprimirInfoFotografia(perfil.getFotosSubidas()));
+                          }catch(EtiquetaException ex){
+                            System.out.println(ex.getMessage());
+                          }                            
+                        }
+                        System.out.println("4: Seguir consultando info. 0: Volver al menu anterior.");                                   
+                        opcMenuIni=lectura.nextInt();                          
+                      }while(opcMenuIni==4);
+                    }  
+                    if(opcMenuIni==5){
+                      perfil=null;
+                      System.out.println("Ha cerrado sesion correctamente");
+                      opcMenu=3;
                     }
-                }while(opcMenuIni!=5);
-            }
+                }while(perfil!=null);
+                }   
+              }      
         }while(opcMenu!=0);    
     }
 }
