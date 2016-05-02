@@ -14,20 +14,25 @@ import Exception.FotografiaException;
 import servicio.Servicio;
 import Exception.NombreException;
 import Exception.EtiquetaException;
+import Exception.MenuException;
+import dao.Dao;
 import data.Fotografia;
 import data.PerfilUsuario;
 import java.util.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 /**
  *
  * @author La Formula de Pina Records
  */
 public class UI {
     
+    private Dao dao;
     private Servicio servicio;
 
     public UI(Servicio servicio)  {
         this.servicio = servicio;
+        this.dao = new Dao();
     }
     
     public void menu(Scanner lectura){
@@ -46,17 +51,27 @@ public class UI {
         System.out.println("Bienvenido a nuestra red social La Formula");
         System.out.println("");
         do{
-           if(opcMenu==3){
-             System.out.println("Menu:");
-             System.out.println("1: Crea tu perfil. 2: Inicia sesion. 0: Salir ");
-             opcMenu= lectura.nextInt();
-             System.out.println("");
+            if(opcMenu==3){
+                String banderaMenu=null;
+                do{
+                    System.out.println("Menu:");
+                    System.out.println("1: Crea tu perfil. 2: Inicia sesion. 0: Salir ");
+                        try{
+                            opcMenu= lectura.nextInt();
+                            if(opcMenu>3||opcMenu<0){
+                                throw new MenuException("Opción no valida");
+                            }
+                            banderaMenu=" ";
+                        }catch(MenuException ex){
+                            System.out.println(ex.getMessage());
+                        }
+                }while(banderaMenu==null);
            }
             if(opcMenu==1){
                 String bandera = null;
                 do{
                     try{
-                        System.out.println("Crea tu perfil de La Formula");
+                        System.out.println("Crea tu perfil");
                         System.out.println("");
                         System.out.print("Ingresa tu Nombre: ");
                         nombre = lectura.next();
@@ -68,12 +83,13 @@ public class UI {
                         edad = lectura.nextInt();
                         System.out.print("Ingresa tu correo electronico(example@correo.com): ");
                         correo = lectura.next();
-                        this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);
-                        bandera= "Excelente, acabas de crear un perfil en La Formula";
+                        this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);                        
+                        this.dao.serializar(this.servicio.buscarUsuario(nick), "RedSocial.ser");
+                        bandera= "Excelente, acabas de crear un perfil";
                         opcMenu=3;
                         System.out.println("");
                         System.out.println(bandera);
-                    }catch(NickException | NombreException | EdadException | CorreoException | ClaveException ex){
+                    }catch(IOException | NickException | NombreException | EdadException | CorreoException | ClaveException ex){
                         System.out.println(ex.getMessage());
                         System.out.println("1. Volver a ingresar los datos. 3.Volver al menu principal. 0.Salir");
                         opcMenu=lectura.nextInt();

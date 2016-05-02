@@ -15,11 +15,16 @@ import data.RedSocial;
  * @author Julian
  */
 public class Dao {
+
+    public Dao() {
+    }
     
     public void serializar(PerfilUsuario perfil, String archivo) throws IOException{
     FileOutputStream outStream=null;     
     try{
-      outStream= new FileOutputStream(archivo);     
+      outStream= new FileOutputStream(archivo);
+      ObjectOutputStream escribirObj = new ObjectOutputStream(outStream);
+      escribirObj.writeObject(perfil);
     }finally{
       if(outStream!=null){
         outStream.close();
@@ -27,4 +32,19 @@ public class Dao {
     }              
     }
     
+    public PerfilUsuario deserializar(String archivo) throws IOException{
+        FileInputStream inStream=null;
+        PerfilUsuario perfil=null;
+        try{
+          String leer;
+          inStream= new FileInputStream(archivo);
+          ObjectInputStream leerObj = new ObjectInputStream(inStream);
+          leer = leerObj.readLine();
+      }finally{
+        if(inStream!=null){
+          inStream.close();
+        }      
+      }
+      return perfil;
+    }
 }
