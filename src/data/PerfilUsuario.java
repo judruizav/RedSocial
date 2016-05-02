@@ -18,7 +18,7 @@ public class PerfilUsuario implements Serializable{
     
     private String nombreReal;
     private String nick;
-    private String claveAcceso;
+    private transient String claveAcceso;
     private int edad;
     private String cuentaCorreo;
     private ArrayList<Comentario> comentariosRealizados;
