@@ -6,11 +6,12 @@
 package data;
 import java.util.Date;
 import Exception.ComentarioException;
+import java.io.Serializable;
 /**
  *
  * @author Julian
  */
-public class Comentario {
+public class Comentario implements Serializable{
     
     private String texto;
     private Date fechaCreacion;

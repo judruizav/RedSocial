@@ -5,13 +5,14 @@
  */
 package data;
 import Exception.FotografiaException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import servicio.Servicio;
 /**
  *
  * @author Julian
  */
-public class Fotografia {
+public class Fotografia implements Serializable{
     
     private String nombreArchivo;
     private String descripcion;

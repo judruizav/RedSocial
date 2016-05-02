@@ -5,12 +5,13 @@
  */
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  *
  * @author Julian
  */
-public class RedSocial {
+public class RedSocial implements Serializable{
     
     private ArrayList<PerfilUsuario> usuarios;
     private ArrayList<Comentario> comentarios;

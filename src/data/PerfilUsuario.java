@@ -9,11 +9,12 @@ import Exception.ClaveException;
 import Exception.CorreoException;
 import Exception.EdadException;
 import Exception.NombreException;
+import java.io.Serializable;
 /**
  *
  * @author Julian
  */
-public class PerfilUsuario {
+public class PerfilUsuario implements Serializable{
     
     private String nombreReal;
     private String nick;
