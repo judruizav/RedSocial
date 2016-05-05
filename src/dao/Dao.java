@@ -21,15 +21,14 @@ public class Dao {
     }
     
     public void serializar(PerfilUsuario perfil) throws IOException{
-    FileOutputStream os=null;    
+    FileOutputStream os;    
     try{
-      os= new FileOutputStream(new File("RedSocial.ser"));
+      os = new FileOutputStream(new File("RedSocial.ser"));
       ObjectOutputStream escribirObj = new ObjectOutputStream(os);
-      escribirObj.writeObject(perfil);
-    }finally{
-      if(os!=null){
-        os.close();
-      }
+      escribirObj.writeObject(perfil.toString());
+      os.close();
+    }catch (Exception e) {
+        throw e;
     }
     }
     

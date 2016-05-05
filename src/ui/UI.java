@@ -113,7 +113,7 @@ public class UI {
                             throw new ClaveException("Clave incorrecta");    
                         }
                         System.out.println("");
-                        banderaIni="Bienvenido " + perfil.getNombreReal();
+                        banderaIni="Bienvenido/a " + perfil.getNombreReal();
                         System.out.println("");
                         System.out.println(banderaIni);
                     }catch(NickException | ClaveException ex){

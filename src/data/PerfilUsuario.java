@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author Julian
  */
-public class PerfilUsuario implements Serializable{
+public class PerfilUsuario implements Serializable {
     
     private String nombreReal;
     private String nick;
