@@ -29,13 +29,13 @@ public class UI {
     
     private Dao dao;
     private Servicio servicio;
-
+    
     public UI(Servicio servicio)  {
         this.servicio = servicio;
         this.dao = new Dao();
     }
     
-    public void menu(Scanner lectura){
+    public void menu(Scanner lectura, BufferedReader bf) throws IOException{
         int opcMenu=3;
         //Crear perfil
         String nombre;
@@ -74,7 +74,7 @@ public class UI {
                         System.out.println("Crea tu perfil");
                         System.out.println("");
                         System.out.print("Ingresa tu Nombre: ");
-                        nombre = lectura.next();
+                        nombre = bf.readLine();
                         System.out.print("Ingresa tu nick: ");
                         nick = lectura.next();
                         System.out.print("Ingresa tu clave de acceso: ");
@@ -140,7 +140,7 @@ public class UI {
                             do{
                                 try{
                                     System.out.print("Escribe un comentario: ");
-                                    textoComentario=lectura.next();
+                                    textoComentario=bf.readLine();
                                     this.servicio.hacerComentario(textoComentario, perfil);
                                     banderaComentario="Comentario realizado";
                                     System.out.println(banderaComentario);
