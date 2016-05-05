@@ -84,7 +84,6 @@ public class UI {
                         System.out.print("Ingresa tu correo electronico(example@correo.com): ");
                         correo = lectura.next();
                         this.servicio.crearPerfil(nombre, nick, edad, claveAcceso, correo);                        
-                        this.dao.serializar(this.servicio.buscarUsuario(nick), "RedSocial.ser");
                         bandera= "Excelente, acabas de crear un perfil";
                         opcMenu=3;
                         System.out.println("");

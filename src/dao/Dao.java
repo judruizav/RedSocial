@@ -10,6 +10,7 @@ import data.PerfilUsuario;
 import data.Fotografia;
 import data.Comentario;
 import data.RedSocial;
+import java.util.ArrayList;
 /**
  *
  * @author Julian
@@ -19,32 +20,35 @@ public class Dao {
     public Dao() {
     }
     
-    public void serializar(PerfilUsuario perfil, String archivo) throws IOException{
-    FileOutputStream outStream=null;     
+    public void serializar(PerfilUsuario perfil) throws IOException{
+    FileOutputStream os=null;    
     try{
-      outStream= new FileOutputStream(archivo);
-      ObjectOutputStream escribirObj = new ObjectOutputStream(outStream);
+      os= new FileOutputStream(new File("RedSocial.ser"));
+      ObjectOutputStream escribirObj = new ObjectOutputStream(os);
       escribirObj.writeObject(perfil);
     }finally{
-      if(outStream!=null){
-        outStream.close();
+      if(os!=null){
+        os.close();
       }
     }
     }
     
-    public PerfilUsuario deserializar(String archivo) throws IOException{
+    public void deserializar(ArrayList<PerfilUsuario> usuarios) throws IOException, ClassNotFoundException{
         FileInputStream inStream=null;
-        PerfilUsuario perfil=null;
+        PerfilUsuario perfil;
         try{
-          String leer;
-          inStream= new FileInputStream(archivo);
+          inStream= new FileInputStream("RedSocial.ser");
           ObjectInputStream leerObj = new ObjectInputStream(inStream);
-          leer = leerObj.readLine();
+          Object temp;
+        while((temp=leerObj.readObject())!=null){
+          temp= leerObj.readObject();
+          perfil= (PerfilUsuario) temp;
+          usuarios.add(perfil);
+        }    
       }finally{
         if(inStream!=null){
           inStream.close();
         }
       }
-      return perfil;
     }
 }

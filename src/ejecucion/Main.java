@@ -23,6 +23,11 @@ public class Main {
      */
     public static void main(String[] args) {
         Servicio servicio = new Servicio();
+        try{
+          servicio.getDao().deserializar(servicio.getRedSocial().getUsuarios());
+        }catch(IOException | ClassNotFoundException ex){
+          System.out.println();
+        }
         UI menu = new UI(servicio);
         Scanner scanner = new Scanner(System.in);
         InputStreamReader is= new InputStreamReader(System.in);

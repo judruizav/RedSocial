@@ -18,6 +18,8 @@ import data.Comentario;
 import data.RedSocial;
 import java.util.ArrayList;
 import java.util.Date;
+import dao.Dao;
+import java.io.IOException;
 /**
  *
  * @author Julian
@@ -25,12 +27,20 @@ import java.util.Date;
 public class Servicio {
 
     private RedSocial redSocial;
-    
+    private Dao dao;
     public Servicio() {
         ArrayList<Fotografia> fotos= new ArrayList<Fotografia>();  
         this.redSocial= new RedSocial(fotos);
+        this.dao=new Dao();
     }
-    
+
+    public RedSocial getRedSocial() {
+        return redSocial;
+    }
+
+    public Dao getDao() {
+        return dao;
+    }
     
     public PerfilUsuario buscarUsuario(String buscar){
         PerfilUsuario usuarioEncontrado= null;
@@ -88,6 +98,11 @@ public class Servicio {
         }
         PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, edad, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
         this.redSocial.getUsuarios().add(nuevoUsuario);
+        try{  
+          this.dao.serializar(nuevoUsuario);    
+        }catch(IOException ex){
+          System.out.println(ex.getMessage());
+        }
     }
     
     public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario)throws FotografiaException{
