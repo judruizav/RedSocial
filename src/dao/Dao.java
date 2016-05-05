@@ -28,8 +28,8 @@ public class Dao {
     }finally{
       if(outStream!=null){
         outStream.close();
-      }      
-    }              
+      }
+    }
     }
     
     public PerfilUsuario deserializar(String archivo) throws IOException{
@@ -43,7 +43,7 @@ public class Dao {
       }finally{
         if(inStream!=null){
           inStream.close();
-        }      
+        }
       }
       return perfil;
     }

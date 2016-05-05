@@ -164,7 +164,7 @@ public class UI {
                                     System.out.println("Nombre del Archivo: ");
                                     nombreArchivo=lectura.next();
                                     System.out.println("Ingrese descripcion: ");
-                                    descripcion=lectura.next();
+                                    descripcion= bf.readLine();
                                     this.servicio.subirFotografia(nombreArchivo, descripcion, perfil);
                                     banderaFoto= "Foto subida exitosamente";
                                     System.out.println(banderaFoto);
@@ -204,7 +204,7 @@ public class UI {
                                 try{
                                     System.out.println("Ingrese los nicks de los usuarios a etiquetar");
                                     while(opcEt==1){
-                                        String nombreTemp= lectura.next();
+                                        String nombreTemp= bf.readLine();
                                         if(this.servicio.buscarUsuario(nombreTemp)==null){
                                           throw new EtiquetaException("El usuario " + nombreTemp + "no tiene un perfil");    
                                         }

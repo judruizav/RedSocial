@@ -30,7 +30,11 @@ public class Main {
         boolean indicador = false;
         int opcion = 0;
         while(indicador == false){
-            menu.menu(scanner, bf);
+            try{
+                menu.menu(scanner, bf);
+            }catch(IOException ex){
+                System.out.println(ex.getMessage());
+            }
             System.out.println("Seguro que desea salir...1. Si 2. No");
             opcion = scanner.nextInt();
             if(opcion == 1){
