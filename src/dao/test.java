@@ -9,16 +9,36 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.*;
-
+import data.PerfilUsuario;
+import data.Comentario;
+import data.Fotografia;
+import data.RedSocial;
+import servicio.Servicio;
 /**
  *
  * @author IVAN
  */
 public class test {
     public static void main(String ...args) {
-        
-        
-        FileOutputStream os;
+      Dao dao= new Dao();  
+      Servicio servicio = new Servicio(dao);
+      try{
+      servicio.getDao().deserializar(servicio.getRedSocial().getUsuarios());
+      }catch(IOException | ClassNotFoundException ex){
+        System.out.println("Deserializacion fallida");
+        if(ex instanceof IOException){
+          System.out.println("IOException");    
+        }
+        if(ex instanceof ClassNotFoundException){
+          System.out.println("ClassNotFoundException");    
+        }
+      }
+      for(int i=0; i<servicio.getRedSocial().getUsuarios().size(); i++){
+          System.out.println(servicio.getRedSocial().getUsuarios().get(i).toString());
+      }
+    }
+}    
+        /*FileOutputStream os;
         A obj = new A(5);
         try{
           os = new FileOutputStream("RedSocial.ser");
@@ -45,7 +65,7 @@ public class test {
         }
     }
 }
-
+        
 
 class A implements Serializable {
     int i;
@@ -64,4 +84,4 @@ class A implements Serializable {
     //private void readObjectNoData() throws ObjectStreamException {
         
     //}
-}
+}*/

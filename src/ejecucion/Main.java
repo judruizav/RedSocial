@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ejecucion;
+import dao.Dao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Servicio servicio = new Servicio();
+        Dao dao = new Dao();
+        Servicio servicio = new Servicio(dao);
         try{
           servicio.getDao().deserializar(servicio.getRedSocial().getUsuarios());
         }catch(IOException | ClassNotFoundException ex){
@@ -44,6 +46,13 @@ public class Main {
             opcion = scanner.nextInt();
             if(opcion == 1){
                 indicador = true;
+                for(int i=0; i<servicio.getRedSocial().getUsuarios().size(); i++){  
+                  try{
+                    servicio.getDao().serializar(servicio.getRedSocial().getUsuarios().get(i));    
+                  }catch(IOException ex){
+                    System.out.println(ex.getMessage());
+                  }  
+                }
             }
         }       
     }

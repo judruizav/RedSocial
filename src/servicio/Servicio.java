@@ -20,18 +20,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import dao.Dao;
 import java.io.IOException;
+import java.io.Serializable;
 /**
  *
  * @author Julian
  */
-public class Servicio {
+public class Servicio implements Serializable{
 
     private RedSocial redSocial;
     private Dao dao;
-    public Servicio() {
+    public Servicio(Dao dao) {
         ArrayList<Fotografia> fotos= new ArrayList<Fotografia>();  
         this.redSocial= new RedSocial(fotos);
-        this.dao=new Dao();
+        this.dao= dao;
     }
 
     public RedSocial getRedSocial() {
@@ -98,11 +99,6 @@ public class Servicio {
         }
         PerfilUsuario nuevoUsuario= new PerfilUsuario(nombreReal, nick, claveAcceso, edad, cuentaCorreo, comentariosRealizados, fotosSubidas, fotosEt);    
         this.redSocial.getUsuarios().add(nuevoUsuario);
-        try{  
-          this.dao.serializar(nuevoUsuario);    
-        }catch(IOException ex){
-          System.out.println(ex.getMessage());
-        }
     }
     
     public void subirFotografia(String nombreArchivo, String descripcion, PerfilUsuario usuario)throws FotografiaException{

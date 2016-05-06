@@ -15,21 +15,22 @@ import java.util.ArrayList;
  *
  * @author Julian
  */
-public class Dao {
+public class Dao implements Serializable{
 
     public Dao() {
     }
     
     public void serializar(PerfilUsuario perfil) throws IOException{
-    FileOutputStream os;    
+    FileOutputStream os=null;    
     try{
       os = new FileOutputStream(new File("RedSocial.ser"));
       ObjectOutputStream escribirObj = new ObjectOutputStream(os);
-      escribirObj.writeObject(perfil.toString());
-      os.close();
-    }catch (Exception e) {
-        throw e;
-    }
+      escribirObj.writeObject(perfil);
+      }finally{
+        if(os!=null){
+          os.close();
+        }
+      }
     }
     
     public void deserializar(ArrayList<PerfilUsuario> usuarios) throws IOException, ClassNotFoundException{
@@ -38,12 +39,14 @@ public class Dao {
         try{
           inStream= new FileInputStream("RedSocial.ser");
           ObjectInputStream leerObj = new ObjectInputStream(inStream);
-          Object temp;
-        while((temp=leerObj.readObject())!=null){
-          temp= leerObj.readObject();
-          perfil= (PerfilUsuario) temp;
-          usuarios.add(perfil);
-        }    
+          Object a;
+          //String temp=leerObj.readUTF();
+          //while((temp= leerObj.readLine())!=null){
+            a= leerObj.readObject();
+            perfil= (PerfilUsuario) a;
+            usuarios.add(perfil); 
+           //System.out.println(temp);
+          //}  
       }finally{
         if(inStream!=null){
           inStream.close();

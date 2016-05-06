@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package Exception;
-
 /**
  *
  * @author IVAN
  */
-public class NombreException extends Exception {
+public class NombreException extends Exception{
    
     public NombreException (String message){
         super(message);    

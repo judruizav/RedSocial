@@ -19,7 +19,6 @@ public class Fotografia implements Serializable{
     private PerfilUsuario usuarioFoto;
     private ArrayList<PerfilUsuario> usuariosEt;
     private ArrayList<String> personasEt;
-    private Servicio servicio= new Servicio();
 
     public Fotografia(String nombreArchivo, String descripcion, PerfilUsuario usuarioFoto, ArrayList<PerfilUsuario> usuariosEt, ArrayList<String> personasEt) throws FotografiaException {
         if(descripcion.length()>200){
@@ -51,10 +50,6 @@ public class Fotografia implements Serializable{
 
     public ArrayList<String> getPersonasEt() {
         return personasEt;
-    }
-
-    public Servicio getServicio() {
-        return servicio;
     }
 
     @Override
