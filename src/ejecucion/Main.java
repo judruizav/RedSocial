@@ -30,7 +30,7 @@ public class Main {
         }catch(IOException | ClassNotFoundException ex){
           System.out.println();
         }
-        UI menu = new UI(servicio);
+        UI menu = new UI(servicio, dao);
         Scanner scanner = new Scanner(System.in);
         InputStreamReader is= new InputStreamReader(System.in);
         BufferedReader bf= new BufferedReader(is);

@@ -20,12 +20,16 @@ public class Dao implements Serializable{
     public Dao() {
     }
     
+    
     public void serializar(PerfilUsuario perfil) throws IOException{
-    FileOutputStream os=null;    
-    try{
-      os = new FileOutputStream(new File("RedSocial.ser"));
+    ByteArrayOutputStream os=null;    
+    try{   
+      RandomAccessFile raf= new RandomAccessFile("RedSocial.ser", "rw");
+      os= new ByteArrayOutputStream();
       ObjectOutputStream escribirObj = new ObjectOutputStream(os);
+      raf.seek(raf.length());
       escribirObj.writeObject(perfil);
+      raf.write(os.toByteArray());
       }finally{
         if(os!=null){
           os.close();
@@ -34,22 +38,17 @@ public class Dao implements Serializable{
     }
     
     public void deserializar(ArrayList<PerfilUsuario> usuarios) throws IOException, ClassNotFoundException{
-        FileInputStream inStream=null;
-        PerfilUsuario perfil;
-        try{
-          inStream= new FileInputStream("RedSocial.ser");
-          ObjectInputStream leerObj = new ObjectInputStream(inStream);
-          Object a;
-          //String temp=leerObj.readUTF();
-          //while((temp= leerObj.readLine())!=null){
-            a= leerObj.readObject();
-            perfil= (PerfilUsuario) a;
-            usuarios.add(perfil); 
-           //System.out.println(temp);
-          //}  
+      FileInputStream is=null;
+      PerfilUsuario perfil;
+      try{
+        RandomAccessFile raf= new RandomAccessFile("RedSocial.ser", "rw");  
+        is= new FileInputStream("RedSocial.ser");  
+        ObjectInputStream objIs= new ObjectInputStream(is);
+        perfil= (PerfilUsuario) objIs.readObject();
+        usuarios.add(perfil);
       }finally{
-        if(inStream!=null){
-          inStream.close();
+        if(is!=null){
+          is.close();
         }
       }
     }

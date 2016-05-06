@@ -30,9 +30,9 @@ public class UI {
     private Dao dao;
     private Servicio servicio;
     
-    public UI(Servicio servicio)  {
+    public UI(Servicio servicio, Dao dao)  {
         this.servicio = servicio;
-        this.dao = new Dao();
+        this.dao = dao;
     }
     
     public void menu(Scanner lectura, BufferedReader bf) throws IOException{
@@ -48,7 +48,7 @@ public class UI {
         String claveAccesoIni;
         PerfilUsuario perfil= null;
         int opcMenuIni;
-        System.out.println("Bienvenido a nuestra red social La Formula");
+        System.out.println("Bienvenido");
         System.out.println("");
         do{
             if(opcMenu==3){

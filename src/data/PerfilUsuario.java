@@ -81,6 +81,12 @@ public class PerfilUsuario implements Serializable {
     public ArrayList<Fotografia> getFotosEt() {
         return fotosEt;
     }
+
+    public int getEdad() {
+        return edad;
+    }
+    
+    
     
     @Override
     public String toString(){
